@@ -12,6 +12,9 @@ To change default toolchain:
 
 Compiler is called `rustc`
 
+If zsh uses the wrong rust binary:
+`export PATH="$HOME/.cargo/bin:$PATH"`
+
 ## Hello World
 
 See `hello_world/main.rs`
