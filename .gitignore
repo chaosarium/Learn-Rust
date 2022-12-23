@@ -1,1 +1,2 @@
-Getting Started/hello_world/main
+**/target
+**/Cargo.lock
