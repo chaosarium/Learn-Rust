@@ -1,4 +1,4 @@
-## Ownership
+# Ownership
 
 - Rust uses an ownership model to manage memory
 - No garbage collector
@@ -94,4 +94,72 @@ fn gives_ownership() -> String {
 fn takes_and_gives_back(a_string: String) -> String {
     a_string // move to caller, so moves out of scope
 } // nothign dropped
+```
+
+# References and Borrowing
+
+We can do this instead of passing around ownership around. It's kind of like passing pointers around in C.
+
+```rust
+fn main() {
+    let s1 = String::from("hello");
+
+    let len = calculate_length(&s1);
+
+    println!("The length of '{}' is {}.", s1, len);
+}
+
+fn calculate_length(s: &String) -> usize {
+    s.len()
+}
+```
+
+Instead of being a copy of the address of s1, s is a pointer to s1. We're "referencing" s1, and Rust calls this "borrowing".
+
+We can use `*` to dereference too, just like in C.
+
+- By default, **references are not mutable!** Here's how to pass a mutable reference. 
+
+```rust
+fn main() {
+    let mut s = String::from("hello");
+
+    change(&mut s);
+}
+
+fn change(some_string: &mut String) {
+    some_string.push_str(", world");
+}
+```
+
+- Note that there can be **a maximum of one mutable reference (in the same scope)!** This is to prevent data race.
+- Also, **no immutable and mutable of same value that could be used at the same time!**
+- **Dangling reference not allowed**, this is to make sure you don't return something that's already freed, etc.
+
+```rust
+// bad, does not compile
+fn main() {
+    let reference_to_nothing = dangle();
+}
+
+fn dangle() -> &String {
+    let s = String::from("hello");
+    &s
+} // reference to s returned but s dropped
+```
+
+# Slice
+
+This allows us to refer to the middle of the bigger chunk of memory.
+
+Making a string slice:
+
+```rust
+let s = String::from("hello world");
+let hello = &s[0..5];
+let world = &s[6..11];
+
+let slice = &s[3..]; // === [3:]
+let slice = &s[..]; // === whole thing
+
 ```
