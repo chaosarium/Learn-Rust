@@ -26,3 +26,7 @@ See `hello_world/main.rs`
 - `cargo run` to compile and run
 - `cargo check` to check if it can compile
 - `cargo build --release` compiles with optimisation for production
+
+## Resources
+
+This extended version of the rust book has nice quizzes https://rust-book.cs.brown.edu/

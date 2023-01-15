@@ -1,0 +1,6 @@
+{
+    "rust-analyzer.linkedProjects": [
+        "5. Structs/struct_example_programme/Cargo.toml"
+    ],
+
+}
